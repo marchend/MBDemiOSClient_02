@@ -1,44 +1,15 @@
 import SwiftUI
 
+// TODO: The visual error banner has been deferred to the Okta-wiring story.
+// The spec screenshot does not include an error banner, and the previous implementation
+// used navy as a status/error accent colour, which the spec explicitly prohibits
+// ("if you are tempted to add a colour for emphasis or status, Don't").
+// `errorMessage` remains on LoginViewModel so the Okta story can set it;
+// the visual rendering should be designed together with that story.
 struct ErrorBannerView: View {
     let message: String?
 
-    // #1B2A4A — dark navy
-    private let navyColor = Color(red: 0.106, green: 0.165, blue: 0.290)
-
     var body: some View {
-        Group {
-            if let message = message {
-                HStack(spacing: 8) {
-                    Image(systemName: "exclamationmark.circle")
-                        .foregroundColor(navyColor)
-                    Text(message)
-                        .font(.footnote)
-                        .foregroundColor(navyColor)
-                        .multilineTextAlignment(.leading)
-                    Spacer()
-                }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 10)
-                .background(Color(.systemBackground))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(navyColor, lineWidth: 1)
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-            } else {
-                EmptyView()
-            }
-        }
-        .frame(height: message == nil ? 0 : nil)
-        .clipped()
+        EmptyView()
     }
-}
-
-#Preview {
-    VStack(spacing: 16) {
-        ErrorBannerView(message: "Invalid username or password.")
-        ErrorBannerView(message: nil)
-    }
-    .padding()
 }

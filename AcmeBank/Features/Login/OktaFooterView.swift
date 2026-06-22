@@ -9,6 +9,8 @@ struct OktaFooterView: View {
                 Text("Secured by")
                     .font(.footnote)
                     .foregroundColor(Color(.systemGray))
+                // TODO: replace with Image("okta-logo") once the Okta brand asset is available in the repo.
+                // Using a generic system symbol as the Okta logo may raise brand/trademark concerns.
                 Image(systemName: "dot.circle")
                     .font(.footnote)
                     .foregroundColor(Color(.systemGray))
